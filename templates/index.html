@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <title>2048 Game _ Fun </title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h1>2048 Game</h1>
+            <button class="btn" onclick="window.location.href='/reset'">New Game</button>
+            <button class="btn" onclick="showInstructions()">How to play</button>
+        </div>
+    
+        <table>
+            {% for r in table %}
+            <tr>
+                {% for p in r %}
+                <td data-value="{{ p }}">{% if p!=0 %}{{ p }}{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="instructions" id="instructions" style="display: none;">
+            <p>🎮 <strong>How to Play:</strong> Use arrow keys to move tiles</p>
+            <p>🎯 <strong>Goal:</strong> Combine tiles to reach 2048!</p>
+            <p>✨ Tiles with same number merge when they touch</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("keydown", function(e){
+            if(e.key === "ArrowLeft"){
+                window.location.href="/move/left";
+            }
+            else if(e.key === "ArrowRight"){
+                window.location.href="/move/right";
+            }
+            else if(e.key === "ArrowUp"){
+                window.location.href="/move/up";
+            }
+            else if(e.key === "ArrowDown"){
+                window.location.href="/move/down";
+            }
+        });
+
+        function showInstructions(){
+            const instructions=document.getElementById('instructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none'
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelector('h1').style.animation = 'glow 2s ease-in-out infinite alternate';
+        });
+    </script>
+</body>
+</html>
+  

@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <title>Game Over - 2048</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Over! 🎯</h1>
+         
+        <table>
+            {% for r in table %}
+            <tr>
+                {% for p in r %}
+                <td data-value="{{ p }}">{% if p != 0 %}{{ p }}{% endif %}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        
+        <div class="controls">
+            <button class="btn" onclick="window.location.href='/reset'">Play Again</button>
+            <button class="btn" onclick="window.location.href='/'">Back to Game</button>
+        </div>
+        
+        <div class="instructions">
+            <p>🔥 <strong>Final Score:</strong> {{ table | max | max }}</p>
+            <p>💫 Better luck next time!</p>
+        </div>
+    </div>
+</body>
+</html>
