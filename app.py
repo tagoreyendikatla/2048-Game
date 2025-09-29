@@ -11,6 +11,7 @@ def index():
         table=set_table()
         session["table"]=table
         session["server_start_time"]=server_start_time
+        session["max_score"]=0
     else:
         table=session["table"]
     return render_template("index.html", table=table)
@@ -33,6 +34,9 @@ def move(dir):
     if dir=="down":
         table=down_drag(table)
 
+    current_max=max(max(r) for r in table)
+    if current_max > session.get("max_score", 0):
+        session["max_score"]=current_max
     if table!=table_copy:
         start_state(table)
     session["table"]=table
